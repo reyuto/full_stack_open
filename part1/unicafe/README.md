@@ -16,3 +16,6 @@ Change your application to display statistics only once feedback has been gather
 Let's continue refactoring the application. Extract the following two components:
 - Button handles the functionality of each feedback submission button.
 - StatisticLine for displaying a single statistic, e.g. the average score.
+
+## 1.11*: unicafe step 6
+Display the statistics in an HTML table, so that your application looks well formatted.
