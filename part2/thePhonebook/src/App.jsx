@@ -2,13 +2,23 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas' },
+    { name: 'Albert Einstien' },
+    { name: 'Johnathan Burger' },
   ]) 
   const [newName, setNewName] = useState('')
 
   const addNewName = (event) => {
     event.preventDefault()
-    if (newName.trim() === "") return;
+
+    // empty validation
+    if (newName.trim() === "") return
+    // duplicate validation
+    if (persons.find(person => person.name === newName)) {
+      alert(`${newName} is already added to the phonebook`)
+      setNewName('')
+      return
+    }
 
     setPersons(persons.concat({name: newName}))
     setNewName('')
