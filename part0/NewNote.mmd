@@ -1,0 +1,37 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: Form submit with new note name
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note (payload: note name)
+    activate server
+    Note left of server: Server saves note name in notes list
+    server-->>browser: Responds with HTTP status code 302. Redirect to `/exampleapp/notes`
+    deactivate server
+
+    Note right of browser: Browser reloads the Notes page
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: Starts JavaScript execution
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [... {"content": "new one", "date": "2026-04-07T18:16:55.081Z"} ]
+    deactivate server
+
+    Note right of browser: OnReadyStateChange callback function executed

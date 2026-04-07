@@ -1,0 +1,6 @@
+sequenceDiagram
+    Note right of browser: JS collects form data and creates AJAX request
+
+    browser->>+server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa (AJAX)
+    Note right of browser: Browser sends note name and timestamp (content-type: application/json)
+    server-->>-browser: HTTP 201 status. Confirms note created.
