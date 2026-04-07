@@ -2,12 +2,15 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone: '123-456-7890' },
-    { name: 'Albert Einstien', phone: '123' },
-    { name: 'Johnathan Burger', phone: '456-7890' },
+    { name: 'Arto Hellas', phone: '123-456-7890', id: '1' },
+    { name: 'Albert Einstien', phone: '123', id: '2' },
+    { name: 'Johnathan Burger', phone: '456-7890', id: '3' },
   ]) 
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
+  const [filter, setFilter] = useState('')
+  
+  const filteredPersons = persons.filter(person => person.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
 
   const addNewName = (event) => {
     event.preventDefault()
@@ -26,7 +29,13 @@ const App = () => {
       return
     }
 
-    setPersons(persons.concat({name: newName, phone: newPhone}))
+    const personObj = {
+      name: newName, 
+      phone: newPhone,
+      id: String(persons.length + 1),
+    }
+
+    setPersons(persons.concat(personObj))
     setNewName('')
     setNewPhone('')
   }
@@ -34,6 +43,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <label>filter shown with <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder='start typing'/></label>
+      <h2>add a new</h2>
       <form onSubmit={addNewName}>
         <div>
           <label>name: </label><input value={newName} onChange={(e) => setNewName(e.target.value)}/>
@@ -46,7 +57,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person => <div key={person.name}>{person.name} ({person.phone})</div>)}
+      {filteredPersons.map(person => <div key={person.name}>{person.name} ({person.phone})</div>)}
     </div>
   )
 }

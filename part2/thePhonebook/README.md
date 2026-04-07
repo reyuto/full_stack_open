@@ -11,3 +11,7 @@ Prevent the user from being able to add names that already exist in the phoneboo
 ## 2.8: The Phonebook Step 3
 
 Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second input element to the form (along with its own event handler)
+
+## 2.9*: The Phonebook Step 4
+
+Implement a search field that can be used to filter the list of people by name
