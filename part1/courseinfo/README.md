@@ -8,3 +8,6 @@ Refactor the Content component so that it does not render any names of parts or 
 
 ## 1.3: Course Information, step 3
 Using objects instead of simple variables with numbers and string. 
+
+## 1.4: Course Information, step 4
+Replace passing individual values with an array and using the map function to render **Part** component.
