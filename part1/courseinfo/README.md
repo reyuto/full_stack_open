@@ -11,3 +11,6 @@ Using objects instead of simple variables with numbers and string.
 
 ## 1.4: Course Information, step 4
 Replace passing individual values with an array and using the map function to render **Part** component.
+
+## 1.5: Course Information, step 5
+Change the course and its parts into a single JavaScript object. Fix everything that breaks.
