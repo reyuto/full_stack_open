@@ -15,3 +15,7 @@ Expand your application by allowing users to add phone numbers to the phone book
 ## 2.9*: The Phonebook Step 4
 
 Implement a search field that can be used to filter the list of people by name
+
+## 2.10: The Phonebook Step 5
+
+If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the *App* root component.
