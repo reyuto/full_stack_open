@@ -1,9 +1,9 @@
-const Person = ({name, phone}) => <div>{name} {phone}</div>
+const Person = ({name, number}) => <div>{name} {number}</div>
 
 const Persons = ({persons}) => 
   persons.map(
-    ({name, phone, id}) => 
-      <Person name={name} phone={phone} key={id} />
+    ({name, number, id}) => 
+      <Person name={name} number={number} key={id} />
   )
 
 export default Persons

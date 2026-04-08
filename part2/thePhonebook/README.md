@@ -19,3 +19,7 @@ Implement a search field that can be used to filter the list of people by name
 ## 2.10: The Phonebook Step 5
 
 If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the *App* root component.
+
+## 2.11: The Phonebook Step 6
+
+We continue with developing the phonebook. Store the initial state of the application in the file db.json, which should be placed in the root of the project.
