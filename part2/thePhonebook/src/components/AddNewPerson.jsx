@@ -1,5 +1,4 @@
 const AddNewPerson = ({addNewPerson, newName, setNewName, newNumber, setNewNumber}) => {
-
   return (
     <div>
       <form onSubmit={addNewPerson}>

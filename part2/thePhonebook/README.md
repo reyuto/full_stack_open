@@ -23,3 +23,11 @@ If you have implemented your application in a single component, refactor it by e
 ## 2.11: The Phonebook Step 6
 
 We continue with developing the phonebook. Store the initial state of the application in the file db.json, which should be placed in the root of the project.
+
+## 2.12: The Phonebook step 7
+
+Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
+
+## 2.13: The Phonebook step 8
+
+Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
