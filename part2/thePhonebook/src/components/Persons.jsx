@@ -4,7 +4,7 @@ const Person = ({person, handleClick}) => {
   return (
     <li>
       {name} {number}
-      <button style={{"padding": "0", "marginLeft": "10px"}} onClick={() => handleClick(id, name)}>delete</button>
+      <button onClick={() => handleClick(id, name)}>delete</button>
     </li>
   )
 }

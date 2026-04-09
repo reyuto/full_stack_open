@@ -17,13 +17,8 @@
     },
     {
       "name": "John Ham",
-      "number": "584237837",
+      "number": "584237838",
       "id": "Qoueo-VNF3o"
-    },
-    {
-      "name": "Mary Longbottom",
-      "number": "3462378423876",
-      "id": "MBflZIxWG1Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

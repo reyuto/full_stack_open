@@ -9,7 +9,7 @@ const AddNewPerson = ({addNewPerson, newName, setNewName, newNumber, setNewNumbe
           <label>phone: </label><input value={newNumber} onChange={(e) => setNewNumber(e.target.value)}/>
         </div>
         <div>
-          <button type="submit">add</button>
+          <button className="submit" type="submit">add</button>
         </div>
       </form>
     </div>

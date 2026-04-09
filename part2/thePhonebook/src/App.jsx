@@ -5,17 +5,25 @@ import AddNewPerson from './components/AddNewPerson'
 import Persons from './components/Persons'
 import PersonAPI from './services/person'
 
+const Notification = ({message}) => message ? <div className={message.type}>{message.text}</div> : null
+
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     PersonAPI.getAll()
       .then(results => setPersons(results))
   }, [])
   
+  const resetForm = () => {
+    setNewName('')
+    setNewNumber('')
+  }
+
   const filteredPersons = persons.filter(
     person => 
       person.name
@@ -23,18 +31,39 @@ const App = () => {
         .indexOf(filter.toLocaleLowerCase()) > -1
   );
 
+  const updatePersonNumber = (existingPerson, newNumber) => {
+    const updateNumber = confirm(`${existingPerson.name} is already added to phonebook, replace the old number with a new one?`)
+
+    if (!updateNumber) return
+
+    const updatedPerson = {...existingPerson, number: newNumber}
+    PersonAPI
+      .update(existingPerson.id, updatedPerson)
+      .then(() => {
+        setPersons(persons => persons.map(p => p.id === existingPerson.id ? updatedPerson : p))
+        setMessage({text: `Number updated from ${existingPerson.number} to ${newNumber}`, type: "success"})
+        setTimeout(() => setMessage(null), 2000)
+        resetForm()
+      })
+  }
+
   const addNewPerson = (event) => {
     event.preventDefault()
 
     // empty validation
     if (newName.trim() === "" || newNumber.trim() === "") return
+    
     // duplicate validation
-    if (persons.find(person => person.name === newName)) {
-      alert(`${newName} is already added to the phonebook`)
-      return
-    }
-    if (persons.find(person => person.number === newNumber)) {
-      alert(`${newNumber} is already added to the phonebook`)
+    const existingPerson = persons.find(person => person.name === newName)
+    if (existingPerson) {
+      if (existingPerson.number !== newNumber) {
+        updatePersonNumber(existingPerson, newNumber)
+      } else {
+        setMessage({text: `${newName} is already added to the phonebook`, type: "error"})
+        setTimeout(() => {
+          setMessage(null)
+        }, 2000)
+      } 
       return
     }
 
@@ -44,9 +73,10 @@ const App = () => {
     })
     .then(person => {
       setPersons(persons.concat(person))
-      setNewName('')
-      setNewNumber('')
-    })    
+      setMessage({text: `Added ${person.name}`, type: "success"})
+      setTimeout(() => setMessage(null), 2000)
+      resetForm()
+    })  
   }
 
   const handleRemovePerson = (id, name) => {
@@ -56,14 +86,17 @@ const App = () => {
       .remove(id)
       .then(() => {
         setPersons(persons.filter(p => p.id !== id))
+        setMessage({text: `Removed ${name}`, type: "success"})
+        setTimeout(() => setMessage(null), 2000)
       })
   }
 
   return (
-    <div>
+    <div className='App'>
       <h2>Phonebook</h2>
       <Filter filter={filter} handleFilterChange={setFilter} />
       <h3>add a new</h3>
+      <Notification message={message} />
       <AddNewPerson 
         addNewPerson={addNewPerson} 
         setNewName={setNewName} 

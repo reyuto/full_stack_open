@@ -35,3 +35,11 @@ Extract the code that handles the communication with the backend into its own mo
 ## 2.14: The Phonebook step 9
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the window.confirm method.
+
+## 2.15*: The Phonebook step 10
+
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
+
+## 2.16: Phonebook step 11
+
+Use the improved error message example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed)
