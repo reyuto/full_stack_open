@@ -16,29 +16,14 @@
       "id": "3"
     },
     {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "name": "John Smith",
-      "number": "4375843954398",
-      "id": "5"
-    },
-    {
-      "name": "Hulk Hogan",
-      "number": " 736438246382",
-      "id": "iOk2BKXkv4c"
-    },
-    {
-      "name": "Hakuna Matata",
-      "number": "4236497492",
-      "id": "WYM0w0ss62Q"
-    },
-    {
       "name": "John Ham",
-      "number": "53465763934",
-      "id": "e_s2eFDU9Bk"
+      "number": "584237837",
+      "id": "Qoueo-VNF3o"
+    },
+    {
+      "name": "Mary Longbottom",
+      "number": "3462378423876",
+      "id": "MBflZIxWG1Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

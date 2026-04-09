@@ -43,13 +43,20 @@ const App = () => {
       number: newNumber.trim(),
     })
     .then(person => {
-    
       setPersons(persons.concat(person))
       setNewName('')
       setNewNumber('')
     })    
+  }
 
+  const handleRemovePerson = (id, name) => {
+    if (confirm(`Delete ${name}?`) !== true) return;
     
+    PersonAPI
+      .remove(id)
+      .then(() => {
+        setPersons(persons.filter(p => p.id !== id))
+      })
   }
 
   return (
@@ -65,7 +72,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <h3>Numbers</h3>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} handleRemovePerson={handleRemovePerson} />
     </div>
   )
 }

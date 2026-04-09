@@ -31,3 +31,7 @@ Currently, the numbers that are added to the phonebook are not saved to a backen
 ## 2.13: The Phonebook step 8
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
+
+## 2.14: The Phonebook step 9
+
+Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the window.confirm method.

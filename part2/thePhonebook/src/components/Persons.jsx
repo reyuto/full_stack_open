@@ -1,9 +1,24 @@
-const Person = ({name, number}) => <div>{name} {number}</div>
+const Person = ({person, handleClick}) => {
+  const {name, id, number} = person
 
-const Persons = ({persons}) => 
-  persons.map(
-    ({name, number, id}) => 
-      <Person name={name} number={number} key={id} />
+  return (
+    <li>
+      {name} {number}
+      <button style={{"padding": "0", "marginLeft": "10px"}} onClick={() => handleClick(id, name)}>delete</button>
+    </li>
   )
+}
+
+const Persons = ({persons, handleRemovePerson}) => 
+{
+  return (
+    <ul>
+      {persons.map(
+        (person) => 
+          <Person person={person} key={person.id} handleClick={handleRemovePerson}/>
+      )}
+    </ul>
+  )
+}
 
 export default Persons
