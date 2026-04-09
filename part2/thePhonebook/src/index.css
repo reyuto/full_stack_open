@@ -25,11 +25,11 @@ input, button, button.submit {
   color: grey;
   margin-block: 5px;
   font-weight: 500;
-  width: 48px;
 }
 
 li button {
   margin-left: 8px;
+  width: 48px;
 }
 
 button:hover, button:active {

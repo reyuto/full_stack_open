@@ -8,7 +8,7 @@ import PersonAPI from './services/person'
 const Notification = ({message}) => message ? <div className={message.type}>{message.text}</div> : null
 
 const App = () => {
-  const [persons, setPersons] = useState([]) 
+  const [persons, setPersons] = useState(null) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
@@ -24,7 +24,7 @@ const App = () => {
     setNewNumber('')
   }
 
-  const filteredPersons = persons.filter(
+  const filteredPersons = persons?.filter(
     person => 
       person.name
         .toLocaleLowerCase()
@@ -44,6 +44,12 @@ const App = () => {
         setMessage({text: `Number updated from ${existingPerson.number} to ${newNumber}`, type: "success"})
         setTimeout(() => setMessage(null), 2000)
         resetForm()
+      })
+      .catch((error) => {
+        console.log(error)
+        setMessage({text: `Information of ${existingPerson.name} has already been removed from server`, type: "error"})
+        setTimeout(() => setMessage(null), 2000)
+        setPersons(persons.filter(p => p.id !== existingPerson.id))
       })
   }
 
@@ -85,18 +91,23 @@ const App = () => {
     PersonAPI
       .remove(id)
       .then(() => {
-        setPersons(persons.filter(p => p.id !== id))
         setMessage({text: `Removed ${name}`, type: "success"})
         setTimeout(() => setMessage(null), 2000)
       })
+      .catch((error) => {
+        console.log(error)
+        setMessage({text: `${name} does not exist on server`, type: "error"})
+        setTimeout(() => setMessage(null), 2000)
+      })
+      .finally(() => setPersons(persons.filter(p => p.id !== id)))
   }
 
   return (
     <div className='App'>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter filter={filter} handleFilterChange={setFilter} />
       <h3>add a new</h3>
-      <Notification message={message} />
       <AddNewPerson 
         addNewPerson={addNewPerson} 
         setNewName={setNewName} 

@@ -13,7 +13,7 @@ const Persons = ({persons, handleRemovePerson}) =>
 {
   return (
     <ul>
-      {persons.map(
+      {persons?.map(
         (person) => 
           <Person person={person} key={person.id} handleClick={handleRemovePerson}/>
       )}
