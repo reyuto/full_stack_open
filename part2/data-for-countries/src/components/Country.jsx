@@ -1,7 +1,9 @@
-const Country = ({data}) => {
+import Weather from "./Weather";
+
+const Country = ({data, weatherData}) => {
   if (data === null) return null;
 
-  const {name, capital, area, population, languages, flags} = data
+  const { name, capital, area, population, languages, flags } = data
 
   return (
     <div className="country">
@@ -17,6 +19,7 @@ const Country = ({data}) => {
       <div style={{border: '1px solid grey', display: 'flex', justifySelf: 'left'}}>
         <img src={flags.png} alt={flags.alt} width="320" height="160" />
       </div>
+      <Weather weatherData={weatherData} />
     </div>
   )
 }

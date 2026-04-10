@@ -15,3 +15,7 @@ The user interface is very simple. The country to be shown is found by typing a 
 There is still a lot to do in this part, so don't get stuck on this exercise!
 
 Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country
+
+## 2.20*: Data for countries, step 3
+
+Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is https://openweathermap.org. Note that it might take some minutes until a generated API key is valid.
