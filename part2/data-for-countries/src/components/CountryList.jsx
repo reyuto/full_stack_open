@@ -1,4 +1,4 @@
-const CountryList = ({data, fetchCountry, countryData}) => {
+const CountryList = ({data, fetchCountry}) => {
   const names = data.map(country => country.name.common)
 
   return (
