@@ -30,6 +30,35 @@ app.get('/api/persons', (request, response) => {
   response.json(directory)
 })
 
+
+const VERY_LARGE_NUMBER = 9999999999
+const generateId = () => {
+  let nextId = Math.floor(Math.random() * VERY_LARGE_NUMBER)
+  while (directory.find(p => p.id === nextId)) {
+    nextId = Math.floor(Math.random() * VERY_LARGE_NUMBER)
+  }
+
+  return nextId
+}
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "missing name and/or number"
+    })
+  }
+
+  const person = {
+    id: String(generateId()),
+    name: body.name,
+    number: body.number
+  }
+  directory = directory.concat(person)
+
+  response.json(person)
+})
+
 app.get('/api/persons/:id', (request, response) => {
   const id = request.params.id
   const person = directory.find(person => person.id === id)
@@ -46,6 +75,7 @@ app.delete('/api/persons/:id', (request, response) => {
   directory = directory.filter(p => p.id !== id)
   response.status(204).end()
 })
+
 
 app.get('/info', (request, response) => {
   response.send(`<div>The phonebook has entries for ${directory.length} people</div><br /><div>${new Date().toString()}</div>`)
