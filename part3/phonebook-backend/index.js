@@ -40,13 +40,30 @@ const generateId = () => {
 
   return nextId
 }
+
+const validateRequest = (body) => {
+  if (!body.name && !body.number) {
+    return "missing name and number"
+  }
+
+  if (!body.name) {
+    return "missing name"
+  }
+
+  if (!body.number) {
+    return "missing number"
+  }
+
+  if (directory.find(p => p.name === body.name)) {
+    return "name must be unique"
+  }
+}
+
 app.post('/api/persons', (request, response) => {
   const body = request.body
-
-  if (!body.name || !body.number) {
-    return response.status(400).json({
-      error: "missing name and/or number"
-    })
+  const error = validateRequest(body)
+  if (error) {
+    return response.status(400).json({ error })
   }
 
   const person = {
@@ -54,6 +71,7 @@ app.post('/api/persons', (request, response) => {
     name: body.name,
     number: body.number
   }
+
   directory = directory.concat(person)
 
   response.json(person)

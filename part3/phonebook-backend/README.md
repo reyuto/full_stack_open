@@ -9,7 +9,7 @@ Implement a Node application that returns a hardcoded list of phonebook entries 
 
 ## 3.2: Phonebook backend step 2
 
-Implement a page at the address http://localhost:3001/info that looks roughly like this:
+Implement a page at the address [http://localhost:3001/info](http://localhost:3001/info) that looks roughly like this:
 
 > Phonebook has info for 2 people \
 > Sat Apr 11 2026 22:22:52 GMT-0700 (Pacific Daylight Time)
@@ -18,7 +18,7 @@ The page has to show the time that the request was received and how many entries
 
 ## 3.3: Phonebook backend step 3
 
-Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be http://localhost:3001/api/persons/5
+Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be [http://localhost:3001/api/persons/5](http://localhost:3001/api/persons/5)
 
 If an entry for the given id is not found, the server has to respond with the appropriate status code.
 
@@ -33,3 +33,15 @@ Test that your functionality works with either Postman or the Visual Studio Code
 Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address [http://localhost:3001/api/persons](http://localhost:3001/api/persons).
 
 Generate a new id for the phonebook entry with the Math.random function. Use a big enough range for your random values so that the likelihood of creating duplicate ids is small.
+
+## 3.6: Phonebook backend step 6
+
+Implement error handling for creating new entries. The request is not allowed to succeed, if:
+
+The name or number is missing
+The name already exists in the phonebook
+Respond to requests like these with the appropriate status code, and also send back information that explains the reason for the error, e.g.:
+
+```js
+{ error: 'name must be unique' }
+```
