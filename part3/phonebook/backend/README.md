@@ -1,4 +1,4 @@
-# Exercises 3.1-3.6
+# Exercises 3.1-3.11
 
 ## 3.1: Phonebook backend step 1
 
@@ -87,3 +87,14 @@ PRO TIP: When you deploy your application to Internet, it is worth it to at leas
 Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.
 
 Create a README.md at the root of your repository, and add a link to your online application to it.
+
+## 3.11 Full Stack Phonebook
+
+Generate a production build of your frontend, and add it to the Internet application using the method introduced in this part.
+
+Also, make sure that the frontend still works locally (in development mode when started with command npm run dev).
+
+If you use Render, make sure the directory dist is not ignored by git on the backend.
+
+NOTE: You shall NOT be deploying the frontend directly at any stage of this part. Only the backend repository is deployed throughout the whole part. The frontend production build is added to the backend repository, and the backend serves it as described in the section Serving static files from the backend.
+
