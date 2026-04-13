@@ -71,3 +71,20 @@ This exercise can be completed in a few different ways. One of the possible solu
 
 creating new tokens
 JSON.stringify
+
+## 3.9 Phonebook backend step 9
+
+Make the backend work with the phonebook frontend from the exercises of the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17.
+
+You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the Network-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or request.body to the console in the event handler responsible for POST requests.
+
+## 3.10 Phonebook backend step 10
+
+Deploy the backend to the internet, for example to Fly.io or Render. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is).
+
+PRO TIP: When you deploy your application to Internet, it is worth it to at least in the beginning keep an eye on the logs of the application AT ALL TIMES.
+
+Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.
+
+Create a README.md at the root of your repository, and add a link to your online application to it.
+

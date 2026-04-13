@@ -1,6 +1,5 @@
 const express = require('express')
 const morgan = require('morgan')
-const cors = require('cors')
 
 let directory = [
     { 
@@ -29,6 +28,7 @@ morgan.token('request-body', (request, response) => JSON.stringify(request.body)
 
 const app = express()
 app.use(express.json())
+app.use(express.static('dist'))
 app.use(
   morgan(
     `:method :url :status :res[content-length] - :response-time ms :request-body}`, 
@@ -37,7 +37,6 @@ app.use(
     }
   )
 )
-app.use(cors())
 
 app.get('/api/persons', (request, response) => {
   response.json(directory)
