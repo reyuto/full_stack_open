@@ -7,6 +7,7 @@ if (process.argv.length < 3) {
 
 let name = "", number = "";
 
+// DO NOT SAVE THE PASSWORD TO GITHUB
 const password = process.argv[2]
 
 if (process.argv.length >= 5) {
