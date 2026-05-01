@@ -1,11 +1,15 @@
 GET http://localhost:3001/api/persons
 
 ###
-GET http://localhost:3001/api/persons/1
+GET http://localhost:3001/api/persons/69f4abe0ad35efcc440f084e
 
 ###
 
-DELETE http://localhost:3001/api/persons/3828783377
+GET http://localhost:3001/api/persons/someinvalidid
+
+###
+
+DELETE http://localhost:3001/api/persons/69f4abe0ad35efcc440f084e
 
 ###
 
@@ -13,10 +17,44 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": "John Doe II",
-  "number": "91-1230494567"
+  "name": "Artemis",
+  "number": "01-5463957436"
+}
+
+###
+
+PUT http://localhost:3001/api/persons/69f4abe0ad35efcc440f084e
+Content-Type: application/json
+
+{
+  "name": "Artemis III",
+  "number": "01-5463957436"
 }
 
 ###
 
 GET http://localhost:3001/info
+
+###
+
+GET http://localhost:3001/404message
+
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "LOL",
+  "number": "01-5463343424"
+}
+
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "LOL",
+  "number": "01-5463"
+}

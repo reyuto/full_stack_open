@@ -1,117 +1,114 @@
-const express = require('express')
-const morgan = require('morgan')
+require("dotenv").config();
+const express = require("express");
+const morgan = require("morgan");
+const Person = require("./models/person");
 
-let directory = [
-    { 
-      "id": "1",
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": "2",
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": "3",
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": "4",
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-]
+morgan.token("request-body", (request, response) =>
+  JSON.stringify(request.body),
+);
 
-morgan.token('request-body', (request, response) => JSON.stringify(request.body))
-
-const app = express()
-app.use(express.json())
-app.use(express.static('dist'))
+const app = express();
+app.use(express.static("dist"));
+app.use(express.json());
 app.use(
   morgan(
-    `:method :url :status :res[content-length] - :response-time ms :request-body}`, 
+    `:method :url :status :res[content-length] - :response-time ms :request-body}`,
     {
-      skip: (request, response) => request.method !== 'POST'
-    }
-  )
-)
+      skip: (request, response) => request.method !== "POST",
+    },
+  ),
+);
 
-app.get('/api/persons', (request, response) => {
-  response.json(directory)
+// GET ALL
+app.get("/api/persons", (request, response) => {
+  Person.find({}).then((persons) => {
+    response.json(persons);
+  });
+});
+
+// POST
+app.post("/api/persons", (request, response, next) => {
+  const { name, number } = request.body;
+
+  const person = new Person({ name, number });
+
+  person
+    .save()
+    .then((savedPerson) => response.json(person))
+    .catch(error => next(error));
+});
+
+// PUT
+app.put("/api/persons/:id", (request, response, next) => {
+  const { name, number } = request.body
+
+  Person.findById(request.params.id)
+    .then(person => {
+      if (!person) {
+        return response.status(404).end()
+      }
+
+      person.name = name
+      person.number = number
+
+      return person.save().then((updatedPerson) => {
+        response.json(updatedPerson)
+      })
+    })
+    .catch(error => next(error))
 })
 
+// GET BY ID
+app.get("/api/persons/:id", (request, response, next) => {
+  Person.findById(request.params.id)
+    .then((note) => {
+      if (note) {
+        response.json(note);
+      } else {
+        response.status(404).end();
+      }
+    })
+    .catch(error => next(error));
+});
 
-const VERY_LARGE_NUMBER = 9999999999
-const generateId = () => {
-  let nextId = Math.floor(Math.random() * VERY_LARGE_NUMBER)
-  while (directory.find(p => p.id === nextId)) {
-    nextId = Math.floor(Math.random() * VERY_LARGE_NUMBER)
-  }
+// DELETE
+app.delete("/api/persons/:id", (request, response, next) => {
+  Person.findByIdAndDelete(request.params.id)
+    .then((data) => {
+      console.log(`DELETE: ${data.name} was removed from the phonebook!`);
+      response.status(204).end();
+    })
+    .catch(error => next(error))
+});
 
-  return nextId
-}
+// GET INFO
+app.get("/info", (request, response) => {
+  Person.countDocuments({}).then((value) =>
+    response.send(
+      `<div>The phonebook has entries of ${value} people</div><br /><div>${new Date().toString()}</div>`,
+    ),
+  );
+});
 
-const validateRequest = (body) => {
-  if (!body.name && !body.number) {
-    return "missing name and number"
-  }
-
-  if (!body.name) {
-    return "missing name"
-  }
-
-  if (!body.number) {
-    return "missing number"
-  }
-
-  if (directory.find(p => p.name === body.name)) {
-    return "name must be unique"
-  }
-}
-
-app.post('/api/persons', (request, response) => {
-  const body = request.body
-  const error = validateRequest(body)
-  if (error) {
-    return response.status(400).json({ error })
-  }
-
-  const person = {
-    id: String(generateId()),
-    name: body.name,
-    number: body.number
-  }
-
-  directory = directory.concat(person)
-
-  response.json(person)
+// 404
+app.use((request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
 })
 
-app.get('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  const person = directory.find(person => person.id === id)
+// 400
+app.use((error, request, response, next) => {
+  console.error(error.message)
 
-  if (!person) {
-    return response.status(404).end()
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformed id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
 
-  response.json(person)
+  next(error)
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  directory = directory.filter(p => p.id !== id)
-  response.status(204).end()
-})
-
-
-app.get('/info', (request, response) => {
-  response.send(`<div>The phonebook has entries for ${directory.length} people</div><br /><div>${new Date().toString()}</div>`)
-})
-
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`Server running on port ${PORT}`);
+});
