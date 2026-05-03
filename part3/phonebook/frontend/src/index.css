@@ -1,69 +1,81 @@
-*, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-
-.App {
-  width: 40rem;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  align-items: center;
-  justify-self: center;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-h1, h2, h3 {
-  color: green;
-  font-style: italic;
-  margin-bottom: 0.75rem;
+.App {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-self: center;
+}
+
+h1,
+h2,
+h3 {
+    color: green;
+    font-style: italic;
+    margin-bottom: 0.75rem;
 }
 
 ul {
-  margin: 0 1rem;
-  padding: 0.5rem 0;
+    margin: 0 1rem;
+    padding: 0.5rem 0;
 }
 
 li {
-  color: black;
-  padding-top: 3px;
-  font-size: 15px;
+    color: black;
+    padding-top: 3px;
+    font-size: 15px;
 }
 
-input, button, button.submit {
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 3px;
-  padding-block: 3px;
-  color: grey;
-  margin-block: 5px;
-  font-weight: 500;
+input,
+button,
+button.submit {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding-block: 3px;
+    color: grey;
+    margin-block: 5px;
+    font-weight: 500;
 }
 
 li button {
-  margin-left: 8px;
-  width: 48px;
+    margin-left: 8px;
+    width: 48px;
 }
 
-button:hover, button:active {
-  background-color: green;
-  border-style: solid;
-  color: white;
+button:hover,
+button:active {
+    background-color: green;
+    border-style: solid;
+    color: white;
 }
 
 .error {
-  color: red;
-  background: lightgrey;
-  font-size: 14px;
-  border-style: solid;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 10px;
+    color: red;
+    background: lightgrey;
+    font-size: 14px;
+    border-style: solid;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 .success {
-  color: green;
-  background: lightgrey;
-  font-size: 14px;
-  border-style: solid;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 10px;
+    color: green;
+    background: lightgrey;
+    font-size: 14px;
+    border-style: solid;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
